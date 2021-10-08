@@ -6,14 +6,14 @@ import {useHistory} from 'react-router-dom';
 
 function SignIn() {
     //import useContext
-    const {isAuth, inloggen, formState, handler} = useContext(AuthContext);
+    const {isAuth, inloggen, handler} = useContext(AuthContext);
     //import usehistory
     const history = useHistory();
 
     //handles submitform
     function handleSubmit(e) {
         e.preventDefault();
-        //logging in
+        //logging in,passing the logindata to loginfunction that sets isAuth to true
         inloggen(isAuth.username, isAuth.password, isAuth.email);
         history.push("/profile")
     }

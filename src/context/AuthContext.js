@@ -34,7 +34,7 @@ function AuthContextProvider({children}) {
     }
 
 
-//loginfunction
+//loginfunction receives the data from form
     function login(username, password, email) {
         toggleIsAuth({
             isAuth: true,
@@ -45,7 +45,7 @@ function AuthContextProvider({children}) {
         console.log("signed in!")
     }
 
-//logoutFunction
+//logoutFunction sets isAuth to false
     function logout() {
         toggleIsAuth(false)
         console.log("signed out!")
