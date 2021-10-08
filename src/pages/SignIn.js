@@ -1,21 +1,21 @@
 import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {AuthContext} from "../context/AuthContext";
-import {useHistory} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 
 
-function SignIn() {
-    //import useContext
-    const {isAuth, inloggen, handler} = useContext(AuthContext);
-    //import usehistory
-    const history = useHistory();
+    function SignIn() {
+    //declare inlog function from AuthContext
+    const {login} = useContext(AuthContext);
+    //declare register and handlesubmit from useForm
+    const {register, handleSubmit} = useForm();
+    //declare history state
+    const history=useHistory();
 
-    //handles submitform
-    function handleSubmit(e) {
-        e.preventDefault();
-        //logging in,passing the logindata to loginfunction that sets isAuth to true
-        inloggen(isAuth.username, isAuth.password, isAuth.email);
-        history.push("/profile")
+
+    function onFormSubmit(data) {
+        login(data.email,data.password);
+        history.push('/profile');
     }
 
 
@@ -24,16 +24,19 @@ function SignIn() {
             <h1>Inloggen</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias cum debitis dolor dolore fuga id
                 molestias qui quo unde?</p>
-
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">usename
-                    <input type="text" name="username" onChange={handler} value={isAuth.username}/>
+            {/*HookForm*/}
+            <form onSubmit={handleSubmit(onFormSubmit)}>
+                <label htmlFor="email">email
+                    <input type="text"
+                           name="email"
+                           {...register("email")}
+                    />
                 </label>
                 <label htmlFor="password">password
-                    <input type="password" name="password" onChange={handler} value={isAuth.password}/>
-                </label>
-                <label htmlFor="email">email
-                    <input type="text" name="email" onChange={handler} value={isAuth.email}/>
+                    <input type="password"
+                           name="password"
+                           {...register("password")}
+                    />
                 </label>
                 <button type="submit">Inloggen</button>
             </form>
