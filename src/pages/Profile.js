@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import {AuthContext} from "../context/AuthContext";
 
 function Profile() {
+    const {formState} = useContext(AuthContext);
+    console.log(formState);
   return (
     <>
       <h1>Profielpagina</h1>

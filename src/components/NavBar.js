@@ -6,7 +6,7 @@ import {AuthContext} from "../context/AuthContext";
 function NavBar() {
   const history = useHistory();
 
-  const {isAuth,inloggen,uitloggen} =  useContext(AuthContext);
+  const {isAuth,inloggen,uitloggen,formState} =  useContext(AuthContext);
     console.log(isAuth);
 
   return (
@@ -19,6 +19,8 @@ function NavBar() {
             </h3>
           </span>
         </Link>
+
+        {isAuth && <p>{isAuth.email}</p>}
 
       <div>
         {!isAuth &&

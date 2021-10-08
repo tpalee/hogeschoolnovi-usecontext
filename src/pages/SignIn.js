@@ -6,17 +6,18 @@ import {useHistory} from 'react-router-dom';
 
 function SignIn() {
     //import useContext
-    const {isAuth, inloggen} = useContext(AuthContext);
+    const {isAuth, inloggen, formState, handler} = useContext(AuthContext);
     //import usehistory
     const history = useHistory();
 
-//handles submitform
+    //handles submitform
     function handleSubmit(e) {
         e.preventDefault();
         //logging in
-        inloggen();
+        inloggen(isAuth.username, isAuth.password, isAuth.email);
         history.push("/profile")
     }
+
 
     return (
         <>
@@ -25,10 +26,17 @@ function SignIn() {
                 molestias qui quo unde?</p>
 
             <form onSubmit={handleSubmit}>
-                <p>*invoervelden*</p>
+                <label htmlFor="username">usename
+                    <input type="text" name="username" onChange={handler} value={isAuth.username}/>
+                </label>
+                <label htmlFor="password">password
+                    <input type="password" name="password" onChange={handler} value={isAuth.password}/>
+                </label>
+                <label htmlFor="email">email
+                    <input type="text" name="email" onChange={handler} value={isAuth.email}/>
+                </label>
                 <button type="submit">Inloggen</button>
             </form>
-
             <p>Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan eerst.</p>
         </>
     );
